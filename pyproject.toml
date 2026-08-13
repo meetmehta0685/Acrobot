@@ -1,0 +1,33 @@
+[project]
+name = "acrobot-rl-comparison"
+version = "1.0.0"
+description = "A rigorous comparison of Q-Learning, DQN, and PPO on Acrobot-v1"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "gymnasium[classic-control]>=1.0,<2.0",
+    "matplotlib>=3.9,<4.0",
+    "numpy>=2.0,<3.0",
+    "pandas>=2.2,<3.0",
+    "pillow>=11.0,<13.0",
+    "pyyaml>=6.0,<7.0",
+    "tabulate>=0.9,<1.0",
+    "torch>=2.4,<3.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "nbformat>=5.10,<6.0",
+    "pytest>=8.0,<9.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["agents", "analysis", "evaluation", "experiments", "training", "utils"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"

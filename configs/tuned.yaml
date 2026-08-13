@@ -1,0 +1,21 @@
+q_learning:
+  learning_rate: 0.1
+  gamma: 0.995
+  epsilon_decay_steps: 75000
+  bins:
+  - 8
+  - 8
+  - 8
+  - 8
+  - 10
+  - 10
+dqn:
+  learning_rate: 0.0003
+  batch_size: 32
+  target_sync_frequency: 1000
+  epsilon_decay_steps: 50000
+ppo:
+  learning_rate: 0.001
+  clip_ratio: 0.3
+  rollout_steps: 1024
+  entropy_coefficient: 0.0

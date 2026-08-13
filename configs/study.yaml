@@ -1,0 +1,70 @@
+methods: [q_learning, dqn, ppo]
+
+run:
+  env_id: Acrobot-v1
+  total_steps: 100000
+  eval_every: 5000
+  eval_episodes: 10
+  solved_return: -100.0
+  max_episode_steps: 500
+
+seeds:
+  tuning: [100, 101, 102]
+  evaluation: [0, 1, 2, 3, 4]
+  sweep: [0, 1, 2]
+
+tuning:
+  trials: 6
+  total_steps: 25000
+  search_seed: 20260811
+  spaces:
+    q_learning:
+      learning_rate: [0.05, 0.1, 0.2, 0.5]
+      gamma: [0.95, 0.99, 0.995]
+      epsilon_decay_steps: [15000, 25000, 50000, 75000]
+      bins:
+        - [4, 4, 4, 4, 6, 6]
+        - [6, 6, 6, 6, 8, 8]
+        - [8, 8, 8, 8, 10, 10]
+    dqn:
+      learning_rate: [0.0003, 0.001, 0.003]
+      batch_size: [32, 64, 128]
+      target_sync_frequency: [250, 500, 1000, 2000]
+      epsilon_decay_steps: [25000, 50000, 75000]
+    ppo:
+      learning_rate: [0.0001, 0.0003, 0.001]
+      clip_ratio: [0.1, 0.2, 0.3]
+      rollout_steps: [512, 1024, 2048]
+      entropy_coefficient: [0.0, 0.005, 0.01, 0.02]
+
+sweeps:
+  total_steps: 50000
+  q_learning:
+    parameter: bins
+    label: Discretization bins
+    values:
+      - [4, 4, 4, 4, 6, 6]
+      - [6, 6, 6, 6, 8, 8]
+      - [8, 8, 8, 8, 10, 10]
+      - [10, 10, 10, 10, 12, 12]
+  dqn:
+    parameter: target_sync_frequency
+    label: Target synchronization interval
+    values: [100, 500, 1000, 5000]
+  ppo:
+    parameter: clip_ratio
+    label: PPO clipping ratio
+    values: [0.05, 0.1, 0.2, 0.3]
+
+ablations:
+  total_steps: 50000
+  dqn_without_target:
+    method: dqn
+    label: DQN without target network
+    params:
+      use_target_network: false
+  ppo_without_clipping:
+    method: ppo
+    label: PPO without clipping
+    params:
+      use_clipping: false
