@@ -1,0 +1,4 @@
+algorithm,mean_return,median_return,return_std,success_rate,mean_steps,training_seconds,seeds
+dqn,-500.0,-500.0,0.0,0.0,500.0,87.5359047499951,1
+ppo,-82.2,-84.0,7.192588778272628,1.0,83.2,219.23025229100313,1
+q_learning,-380.2,-391.0,89.20986492535451,0.8,381.0,3.217284540995024,1

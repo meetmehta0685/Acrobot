@@ -78,9 +78,11 @@ the pipeline but are not valid evidence that one algorithm is better."""
         ),
         nbf.v4.new_markdown_cell("## 6. Inspect the raw evidence"),
         nbf.v4.new_code_cell(
-            """summary = pd.read_csv(OUTPUT_DIRECTORY / 'summary.csv')
+            """from IPython.display import Image
+
+summary = pd.read_csv(OUTPUT_DIRECTORY / 'summary.csv')
 display(summary)
-display(plt.imread(OUTPUT_DIRECTORY / 'comparison.png'))
+display(Image(filename=str(OUTPUT_DIRECTORY / 'comparison.png')))
 print('Raw files:', sorted(path.name for path in OUTPUT_DIRECTORY.iterdir()))"""
         ),
         nbf.v4.new_markdown_cell(
